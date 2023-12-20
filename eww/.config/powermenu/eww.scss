@@ -1,0 +1,27 @@
+* {
+  all: unset;
+}
+
+%template {
+  border-radius: 10px;	
+  padding: 15px;
+  font-family: "Readex Pro";
+  font-size: 24px;
+  color: #CDD6F4;
+}
+
+button {
+  @extend %template;
+  margin: 10px;
+  background-color: #1E1E2E;
+  border: 2px solid #e5b9c6;
+}
+
+button:hover {
+  background-color: #382D2E;
+}
+
+.powermenu {
+  @extend %template;
+}
+

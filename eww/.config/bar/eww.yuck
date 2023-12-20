@@ -1,0 +1,117 @@
+(defwidget workspaces []
+  (box :orientation "h" :class "module"
+    (label :text "${workspace-cmd}")
+  )
+)
+
+(defwidget net_status []
+  (box :orientation "h" :class "module-network" :hexpand false :vexpand false :space-evenly "true" :orientation "h"
+      (label :text "${net_status}" :class "net_status" )
+  )
+)
+
+(defwidget updates []
+   (box :orientation "h" :class "module-right" :space-evenly "false" :orientation "h" :spacing "3" 
+        (label :text "  " :class "updates")
+        (label :text update_no :class "updates")
+   )
+
+)
+
+(defwidget left []
+  (box :orientation "h" :class "left" :halign "start" :hexpand false :vexpand false :space-evenly false
+    (workspaces)
+    (updates)
+  )
+)
+
+(defwidget player []
+    (label :class "player-label" :text {song != "" ? "${song}| " : " | " })
+)
+
+(defwidget visualizer []
+    (label :text {"${viz} "})
+)
+
+(defwidget middle []
+   (box :orientation "h" :class "module-middle" :space-evenly false
+    (player :hexpand false :vexpand false) 
+    (box :orientation "h" :class "spacer" :width "10px")  
+    (visualizer :hexpand false :vexpand false)
+  )
+)
+
+(defwidget battery []
+  (box :orientation "h" :class "module-right"
+    (label :text "${capacity}% |  ${heart}%")
+  )
+)
+
+(defwidget time []
+  (box :orientation "h" :class "module-right"
+    (label :text " ${time-cmd}")
+  )
+)
+
+(defwidget right []
+  (box :orientation "h" :class "right" :halign "end" :hexpand false :vexpand false :space-evenly false
+    (battery)
+    (time)
+  )
+)
+
+(defwidget eth_gas []
+  (box :orientation "h" :class "module-right"
+    (label :text "⟠ $${eth_price} |  ${gas_price}")
+  )
+)
+
+(defwidget topLeft []
+  (box :orientation "h" :class "left" :halign "start" :hexpand false :vexpand false :space-evenly false
+    (eth_gas)
+   )
+)
+
+(defwidget topRight []
+  (box :orientation "h" :class "right" :halign "end" :hexpand false :vexpand false :space-evenly false
+    (net_status)
+   )
+)
+
+(defwidget bottomBar []
+  (centerbox :orientation "h" :class "bar"
+    (left)
+    (middle)
+    (right)
+  )
+)
+
+(defwidget topBar []
+  (centerbox :orientation "h" :class "bar"
+    (topLeft)
+    (label :text "")
+    (topRight)
+  )
+)
+(defwindow bottom-bar :monitor 0 :geometry 
+  (geometry :x "0" :y "0" :anchor "bottom center" :height "5px" :width "100%") 
+  :stacking "fg" :exclusive true :focusable false :namespace "bottom-bar" 
+  (bottomBar)
+)
+
+(defwindow top-bar :monitor 0 :geometry 
+  (geometry :x "0" :y "0" :anchor "top center" :height "5px" :width "100%") 
+  :stacking "fg" :exclusive true :focusable false :namespace "top-bar" 
+  (topBar)
+)
+
+(defpoll eth_price :interval "60s" "scripts/eth_price.sh")
+(defpoll gas_price :interval "5s" "scripts/gas_price.sh")
+(defpoll heart :interval "3600s" "scripts/health.sh")
+(defpoll net_status :interval "60s" "scripts/network.sh")
+(defpoll workspace-cmd :interval "1s" "scripts/workspaces.sh")
+(defpoll time-cmd :interval "1s" "date +'%b %d ✦ %a |  %I:%M:%S %p '")
+(defpoll capacity :interval "1s" "scripts/battery.sh")
+(deflisten update_no :initial "" "scripts/paru_updates.sh")
+(deflisten viz :initial "" "playerctl --follow status | scripts/visualizer.sh")
+(deflisten song :initial "" "playerctl --follow status | scripts/radio.sh")

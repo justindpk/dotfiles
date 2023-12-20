@@ -1,0 +1,95 @@
+-- Function to convert hex to RGB
+local function hex_to_rgb(hex)
+    hex = hex:gsub("#","")
+    return tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6))
+end
+
+-- Function to convert RGB to hex
+local function rgb_to_hex(r, g, b)
+    return string.format("#%02x%02x%02x", r, g, b)
+end
+
+-- Function to adjust brightness
+local function adjust_brightness(hex, percent)
+    local r, g, b = hex_to_rgb(hex)
+    r = math.min(r * percent / 100, 255)
+    g = math.min(g * percent / 100, 255)
+    b = math.min(b * percent / 100, 255)
+    return rgb_to_hex(r, g, b)
+end
+
+local Colors = {{
+  color0 = "{color0}",
+  color1 = "{color1}",
+  color2 = "{color2}",
+  color3 = "{color3}",
+  color4 = "{color4}",
+  color5 = "{color5}",
+  color6 = "{color6}",
+  color7 = "{color7}",
+  color8 = "{color8}",
+  color9 = "{color9}",
+  color10 = "{color10}",
+  color11 = "{color11}",
+  color12 = "{color12}",
+  color13 = "{color13}",
+  color14 = "{color14}",
+  color15 = "{color15}",
+  dark0_hard = adjust_brightness("{color0}", 75),
+  dark0 = "{color0}",
+  dark0_soft = adjust_brightness("{color0}", 95),
+  dark1 = adjust_brightness("{color0}", 100),
+  dark2 = adjust_brightness("{color0}", 150),
+  dark3 = adjust_brightness("{color8}", 100),
+  dark4 = adjust_brightness("{color15}", 100),
+  light0_hard = adjust_brightness("{color15}", 120),
+  light0 = adjust_brightness("{color7}", 110),
+  light0_soft = adjust_brightness("{color7}", 115),
+  light1 = adjust_brightness("{color7}", 105),
+  light2 = adjust_brightness("{color15}", 125),
+  light3 = adjust_brightness("{color15}", 130),
+  light4 = adjust_brightness("{color7}", 120),
+  bright_red = "{color9}",
+  bright_green = "{color10}",
+  bright_yellow = "{color11}",
+  bright_blue = "{color12}",
+  bright_purple = "{color13}",
+  bright_aqua = "{color14}",
+  bright_orange = adjust_brightness("{color9}", 120),
+  neutral_red = "{color1}",
+  neutral_green = "{color2}",
+  neutral_yellow = "{color3}",
+  neutral_blue = "{color4}",
+  neutral_purple = "{color5}",
+  neutral_aqua = "{color6}",
+  neutral_orange = adjust_brightness("{color1}", 120),
+  faded_red = adjust_brightness("{color1}", 70),
+  faded_green = adjust_brightness("{color2}", 70),
+  faded_yellow = adjust_brightness("{color3}", 70),
+  faded_blue = adjust_brightness("{color4}", 70),
+  faded_purple = adjust_brightness("{color5}", 70),
+  faded_aqua = adjust_brightness("{color6}", 70),
+  faded_orange = adjust_brightness("{color1}", 70),
+  dark_red_hard = adjust_brightness("{color1}", 60),
+  dark_red = adjust_brightness("{color1}", 80),
+  dark_red_soft = adjust_brightness("{color1}", 90),
+  light_red_hard = adjust_brightness("{color9}", 120),
+  light_red = adjust_brightness("{color9}", 110),
+  light_red_soft = adjust_brightness("{color9}", 105),
+  dark_green_hard = adjust_brightness("{color2}", 60),
+  dark_green = adjust_brightness("{color2}", 80),
+  dark_green_soft = adjust_brightness("{color2}", 90),
+  light_green_hard = adjust_brightness("{color10}", 120),
+  light_green = adjust_brightness("{color10}", 110),
+  light_green_soft = adjust_brightness("{color10}", 105),
+  dark_aqua_hard = adjust_brightness("{color6}", 60),
+  dark_aqua = adjust_brightness("{color6}", 80),
+  dark_aqua_soft = adjust_brightness("{color6}", 90),
+  light_aqua_hard = adjust_brightness("{color14}", 120),
+  light_aqua = adjust_brightness("{color14}", 110),
+  light_aqua_soft = adjust_brightness("{color14}", 105),
+  gray = "{color7}",
+  alpha = {color0.alpha_dec},
+}}
+
+return Colors

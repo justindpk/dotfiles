@@ -1,0 +1,78 @@
+* {
+  all: unset;
+}
+
+%module {
+  background-color: #1E1E2E;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  border: 2px solid #382D2E;
+  color: #e5b9c6;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.module {
+  @extend %module;
+  margin-right: 5px;
+}
+
+.module-right {
+  @extend %module;
+  margin-left: 5px;
+}
+.module-network {
+ @extend %module;
+ margin-left: 3px;
+ margin-right: 5px;
+}
+.player-widget {
+  @extend %module;
+  margin-right: 15px;
+}
+
+.module-middle {
+ @extend %module;
+ padding-right: 15px;
+ }
+
+%spacer {
+  background-color: #1E1E2E;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #e5b9c6;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.spacer {
+  @extend %spacer;
+  margin-right: 2px;
+}
+
+.thinner {
+ @extend %spacer;
+ font-weight: 400;
+}
+
+label {
+  font-family: "JetBrains Mono", "Font Awesome 6 Free"
+}
+
+.bar {
+  background-color: rgba(0,0,0,0);
+}
+
+.empty {
+  background-color: rgba(0,0,0,0);
+  color: rgba(0,0,0,0);
+}
