@@ -40,10 +40,10 @@ scroll_song_info() {
       fi
 
       song_info="$title_scroll✦ $artist_scroll"
-      echo " $song_info"
+      echo " $song_info"
       eww update player_widget="$song_info"
       elif [ "$status" = "Paused" ]; then
-      echo " $song_info"
+      echo " $song_info"
     fi
 
     sleep 0.48
