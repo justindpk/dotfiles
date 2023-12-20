@@ -1,5 +1,5 @@
 return {
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { 'catppuccin/nvim' },
   { 'deviantfero/wpgtk.vim' },
   { 'ellisonleao/gruvbox.nvim' },
   { 'dylanaraps/wal.vim' },
