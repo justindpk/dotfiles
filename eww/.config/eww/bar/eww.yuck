@@ -4,9 +4,11 @@
   )
 )
 
-(defwidget net_status []
+(defwidget wifi []
   (box :orientation "h" :class "module-network" :hexpand false :vexpand false :space-evenly "true" :orientation "h"
-      (label :text "${net_status}" :class "net_status" )
+      (button :onclick "scripts/wifi_drop.sh"
+            :class "net_status"
+            (label :text "${net_status}"))
   )
 )
 
@@ -74,7 +76,7 @@
 
 (defwidget topRight []
   (box :orientation "h" :class "right" :halign "end" :hexpand false :vexpand false :space-evenly false
-    (net_status)
+    (wifi)
    )
 )
 
