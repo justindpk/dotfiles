@@ -28,7 +28,7 @@
 )
 
 (defwidget player []
-    (label :class "player-label" :text {song != "" ? "${song}| " : " | " })
+    (label :class "player-label" :text {song != "" ? "${song} | " : " | " })
 )
 
 (defwidget visualizer []
@@ -36,9 +36,15 @@
 )
 
 (defwidget middle []
-   (box :orientation "h" :class "module-middle" :space-evenly false
+   (box :orientation "h" :class "module-middle" :space-evenly false 
     (player :hexpand false :vexpand false) 
-    (box :orientation "h" :class "spacer" :width "10px")  
+    (visualizer :hexpand false :vexpand false)
+  )
+)
+
+
+(defwidget topMiddle []
+   (box :orientation "h" :class "module-middle" :space-evenly false 
     (visualizer :hexpand false :vexpand false)
   )
 )
@@ -91,7 +97,7 @@
 (defwidget topBar []
   (centerbox :orientation "h" :class "bar"
     (topLeft)
-    (label :text "")
+    (label :text " ")
     (topRight)
   )
 )
@@ -112,7 +118,7 @@
 (defpoll heart :interval "3600s" "scripts/health.sh")
 (defpoll net_status :interval "60s" "scripts/network.sh")
 (defpoll workspace-cmd :interval "1s" "scripts/workspaces.sh")
-(defpoll time-cmd :interval "1s" "date +'%b %d ✦ %a |  %I:%M:%S %p '")
+(defpoll time-cmd :interval "1s" "date +'%b %d ✦ %a |  %I:%M %p '")
 (defpoll capacity :interval "1s" "scripts/battery.sh")
 (deflisten update_no :initial "" "scripts/paru_updates.sh")
 (deflisten viz :initial "" "playerctl --follow status | scripts/visualizer.sh")
